@@ -20,7 +20,6 @@ public class SudokuGame implements Serializable {
         return gameState;
     }
 
-    //The SudokuUtilities class(which has a static function) produces a copy of the array, which basically protects the SudokuGame object from being messed with or changed over time.
     public int[][] getCopyOfGridState() {
         return SudokuUtilities.copyToNewArray(gridState);
     }
