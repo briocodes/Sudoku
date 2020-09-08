@@ -21,23 +21,10 @@ import sudoku.problemdomain.SudokuGame;
 
 import java.util.HashMap;
 
-/**
- * Now building the actual user interface which takes bulk of the time
- * The EventHandler and KeyEvent come from Javafx.. That's actually how we listen for inputs from the keyboard for the user interface.
- * We thus implement methods from the interfaces
- *
- * Again Stage comes from Javafx, and is basically like the background window for the apllication.
- * Group is more like a div (talking from the html/css perspective).. Its a container of some kind(View group from Android perspective)
- */
 public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHandler<KeyEvent> {
     private final Stage stage;
     private final Group root;
 
-    /**
-     *And how do we keep track of 81 different text fields?
-     * We just need to have a reference variable for every single TextField. So we store the references of all these TextFields within our HashMap, so we can use the hash function to retrieve and store them
-     * If you observed, the equals and hashCode functions were overridden before now, and the SudokuTextField also created has x and y value
-     */
     private HashMap<Coordinates,SudokuTextField> textFieldCoordinates;
 
     private  IUserInterfaceContract.EventListener listener;
@@ -79,7 +66,8 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
             }else {
                 thickness = 2;
             }
-            //Rectangle class from javafx... Result after implementation would be a series of gridlines.
+            //Rectangle class from javafx... Result after implementation would
+            // be a series of gridlines.
             Rectangle verticalLine = getLine(
                     xAndY + 64 *index,
                     BOARD_PADDING,
@@ -133,7 +121,8 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
                 //Listening for inputs from the user
                 tile.setOnKeyPressed(this);
 
-                //The user interface simple class implements the EventListener and EventHandler interface from javafx.
+                //The user interface simple class implements the EventListener
+                // and EventHandler interface from javafx.
                 textFieldCoordinates.put(new Coordinates(xIndex,yIndex),tile);
 
                 root.getChildren().add(tile);
@@ -189,6 +178,7 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
 
     @Override
     public void setListener(IUserInterfaceContract.EventListener listener) {
+
         this.listener = listener;
     }
 
@@ -208,7 +198,8 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
     public void updateBoard(SudokuGame game) {
         for (int xIndex=0; xIndex<9; xIndex++){
             for (int yIndex=0; yIndex<9; yIndex++){
-                TextField tile = textFieldCoordinates.get(new Coordinates(xIndex,yIndex));
+                TextField tile = textFieldCoordinates.get(
+                        new Coordinates(xIndex,yIndex));
 
                 String value = Integer.toString(
                         game.getCopyOfGridState()[xIndex][yIndex]
@@ -221,7 +212,9 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
                 );
 
                 /**
-                 * Method would be called when a new game is created. If the square is empty, we disable the TextField and set it to a less thick font. Otherwise the TextField is enabled with a thick font.
+                 * Method would be called when a new game is created. If the square
+                 * is empty, we disable the TextField and set it to a less thick
+                 * font. Otherwise the TextField is enabled with a thick font.
                  */
                 if (game.getGameState() == GameState.NEW){
                     if (value.equals("")){
@@ -239,9 +232,11 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
     @Override
     public void showDialog(String message) {
         /**
-         * When the game logic shows that the game has been completed properly, then we get here
+         * When the game logic shows that the game has been completed properly,
+         * then we get here
          */
-        Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.OK);
+        Alert dialog = new Alert(
+                Alert.AlertType.CONFIRMATION, message, ButtonType.OK);
         dialog.showAndWait();
 
         if (dialog.getResult()==ButtonType.OK) listener.onDialogClick();
@@ -257,7 +252,8 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
 
     @Override
     public void handle(KeyEvent event) {
-        //When a user enters a number inside the text box, the event pops up here, and is hence checked
+        //When a user enters a number inside the text box, the event pops up here,
+        // and is hence checked
         if (event.getEventType()==KeyEvent.KEY_PRESSED){
             if (event.getText().matches("[0-9]")){
                 int value = Integer.parseInt(event.getText());
