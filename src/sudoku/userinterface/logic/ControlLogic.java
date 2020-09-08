@@ -9,10 +9,8 @@ import sudoku.userinterface.IUserInterfaceContract;
 
 import java.io.IOException;
 
-//The ControlLogic class is a controller representer, and basically manages the interactions between the user, the user interface and the backend of the application(the computation logic)
-
 public class ControlLogic implements IUserInterfaceContract.EventListener {
-    //It is necessary when working on the controller, presenter or view model class,to always communicate with the backend and also the frontend(View class) through interfaces. If interfaces are not to be used anywhere else, its expedient to use them across very large and important architectural boundaries across any application. These are solid principles that help you design your application upfront without worrying about implementation.It's not a waste of time. If we are to change the Storage implementation, we can do that quickly without having to cause any issues in this control logic class.
+
     private IStorage storage;
     private IUserInterfaceContract.View view;
 
