@@ -5,7 +5,6 @@ import sudoku.problemdomain.SudokuGame;
 
 import java.io.*;
 
-//Persistence mechanism for persisting data(like a database). With this, a file can be written to the local file system to store the data.
 public class LocalStorageImpl implements IStorage {
 
     private static File GAME_DATA = new File(
