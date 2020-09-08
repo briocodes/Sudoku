@@ -49,7 +49,7 @@ public class GameGenerator {
         Random random = new Random(System.currentTimeMillis());
         int[][] newGrid = new int[GRID_BOUNDARY][GRID_BOUNDARY];
         for (int value = 1; value <= GRID_BOUNDARY; value++){
-            //Allocation tracks the number of times the number in the give value is allocated. The Interrupt is going to do back-tracking.. If an allocation is attempted too many times, the interrupt variable would be incremented
+
             int allocations = 0;
             int interrupt = 0;
 
