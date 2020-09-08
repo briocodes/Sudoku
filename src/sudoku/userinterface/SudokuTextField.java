@@ -2,8 +2,6 @@ package sudoku.userinterface;
 
 import javafx.scene.control.TextField;
 
-//The TextField essentially maintains the x and y coordinates
-
 public class SudokuTextField extends TextField {
     private final int x;
     private final int y;
